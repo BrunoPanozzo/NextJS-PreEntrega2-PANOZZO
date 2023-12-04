@@ -1,9 +1,11 @@
+'use client'
+import { useCartContext } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
 const CartWidget = () => {
 
-    const cantidadProductos = 0;
+    const { totalItems } = useCartContext()
 
     return (
         <div>
@@ -14,7 +16,7 @@ const CartWidget = () => {
                         width={100}
                         height={70}
                     />
-                    <span id="cantidadProductos" className="absolute p-1 text-center font-semibold text-sm rounded-full py-2 px-4 bg-blue-600">{cantidadProductos}</span>
+                    <span id="cantidadProductos" className="absolute p-1 text-center font-semibold text-sm rounded-full py-2 px-4 bg-blue-600">{totalItems()}</span>
                 </Link>
         </div>
     )

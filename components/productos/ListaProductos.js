@@ -3,12 +3,7 @@ import Producto from './Producto'
 import Boton from '../ui/Boton'
 
 const getProductos = async (categoria) => {
-    const response = await await fetch(`http://localhost:3000/api/productos/${categoria}`,
-    {cache: 'no-store',
-     next:{
-        revalidate:1800
-     }
-    })
+    const response = await await fetch(`http://localhost:3000/api/productos/${categoria}`,{cache: 'no-cache'})
 
     if (!response.ok)
         throw new Error("Falló la obtención de los productos.")

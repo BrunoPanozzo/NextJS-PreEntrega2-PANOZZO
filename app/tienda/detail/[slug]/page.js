@@ -1,6 +1,6 @@
 import DetalleProducto from "@/components/productos/DetalleProducto"
 import { Suspense } from "react"
-import Loading from "../../loading"
+import Loading from "./loading"
 
 const DetailPage = ({ params }) => {
 
@@ -8,7 +8,7 @@ const DetailPage = ({ params }) => {
 
     return (
         <main className="container m-auto mt-10">
-            <Suspense fallback={<Loading texto={`${slug}`} />}>
+            <Suspense fallback={<Loading texto={`Cargando ${slug}...`} />}>
                 <DetalleProducto slug={slug} />
             </Suspense>
         </main>
