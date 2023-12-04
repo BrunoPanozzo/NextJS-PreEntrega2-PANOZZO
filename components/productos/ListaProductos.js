@@ -9,9 +9,7 @@ const ListaProductos = async ({ categoria, mostrarBotones }) => {
     const items =  await fetch(`http://localhost:3000/api/productos/${categoria}`,
                                {cache: 'no-store'}
     ).then(response =>response.json())
-
-    console.log( items)
-
+    
     return (
         <>
             {mostrarBotones ? <Boton className="flex justify-between items-center ml-auto font-mono text-lg my-4">
@@ -24,7 +22,7 @@ const ListaProductos = async ({ categoria, mostrarBotones }) => {
                     items.map(item => <Producto key={item.slug} item={item} mostrarBotones={mostrarBotones}/>)
                 }                  
             </section>
-        </>
+        </>        
     )
 }
 export default ListaProductos

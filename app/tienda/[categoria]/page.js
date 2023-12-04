@@ -1,8 +1,10 @@
 import NotFound from '@/app/not-found'
 import ListaProductos from '@/components/productos/ListaProductos'
 import MenuCategorias from '@/components/productos/MenuCategorias'
+import { Suspense } from 'react'
+import Loading from '../loading'
 
-export async function generateMetadata({params, searchParams}, parent) {
+export async function generateMetadata({ params, searchParams }, parent) {
 
     return {
         title: `Categoría - ${params.categoria}`,
@@ -10,7 +12,7 @@ export async function generateMetadata({params, searchParams}, parent) {
     }
 }
 
-const ProductosPage = ({params}) => {
+const ProductosPage = ({ params }) => {
 
     const rutasDinamicas = [
         "todos",
@@ -19,14 +21,14 @@ const ProductosPage = ({params}) => {
         "Electrodomesticos",
         "Computacion"
     ]
-    
+
     const { categoria } = params
-  
+
     const itemExistente = rutasDinamicas.some((item) => item === categoria)
-   
-    if(!itemExistente)
+
+    if (!itemExistente)
         return (
-        <NotFound/>
+            <NotFound />
         )
 
     return (
@@ -35,7 +37,9 @@ const ProductosPage = ({params}) => {
 
             <div className="flex gap-10">
                 <MenuCategorias />
-                <ListaProductos categoria={categoria} mostrarBotones={false}/>
+                <Suspense fallback={<Loading texto={`${categoria}`}/>}>
+                    <ListaProductos categoria={categoria} mostrarBotones={false} />
+                </Suspense>
             </div>
         </main>
     )

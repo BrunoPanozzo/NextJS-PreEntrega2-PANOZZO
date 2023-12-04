@@ -22,7 +22,7 @@ const Producto = ({ item, mostrarBotones }) => {
 
                 <div className="px-4 border-t border-gray-200">
                     <h4 className="text-sm my-4">{item.nombre}</h4>
-                    <p className="text-2xl font-semibold mb-6">$ {item.precio}</p>
+                    <p className="text-2xl font-semibold mb-6">$ {item.precio.toLocaleString()}</p>
                     {
                         mostrarBotones ? <div className="flex justify-center items-center gap-2">
                             <Image
