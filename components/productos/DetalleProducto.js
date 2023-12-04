@@ -3,12 +3,22 @@ import Retornar from "../ui/Retornar"
 import Contador from "../ui/Contador"
 import NotFound from "@/app/not-found"
 
+const getProducto = async (slug) => {
+    const response = await fetch(`http://localhost:3000/api/producto/${slug}`,{ cache: "no-store" })
+
+    if (!response.ok)
+        throw new Error("Falló la obtención del producto.")
+
+    return response.json()
+}
 
 const DetalleProducto = async ({ slug }) => {
 
-    const producto = await fetch(`http://localhost:3000/api/producto/${slug}`,
-        { cache: 'no-store' }
-    ).then(response => response.json())
+    // const producto = await fetch(`http://localhost:3000/api/producto/${slug}`,
+    //                              { cache: 'no-store' }
+    // ).then(response => response.json())
+
+    const producto = await getProducto(slug);
 
     if (!producto)
         return (

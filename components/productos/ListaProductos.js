@@ -2,13 +2,27 @@
 import Producto from './Producto'
 import Boton from '../ui/Boton'
 
+const getProductos = async (categoria) => {
+    const response = await await fetch(`http://localhost:3000/api/productos/${categoria}`,
+    {cache: 'no-store',
+     next:{
+        revalidate:1800
+     }
+    })
+
+    if (!response.ok)
+        throw new Error("Falló la obtención de los productos.")
+
+    return response.json()
+}
+
 const ListaProductos = async ({ categoria, mostrarBotones }) => {
 
-    // const items = categoria === 'todos' ? mockData : mockData.filter(item => item.categoria === categoria)
+    // const items =  await fetch(`http://localhost:3000/api/productos/${categoria}`,
+    //                            {cache: 'no-store'}
+    // ).then(response =>response.json())
 
-    const items =  await fetch(`http://localhost:3000/api/productos/${categoria}`,
-                               {cache: 'no-store'}
-    ).then(response =>response.json())
+    const items = await getProductos(categoria);
     
     return (
         <>
