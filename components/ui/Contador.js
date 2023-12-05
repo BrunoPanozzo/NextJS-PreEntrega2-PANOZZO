@@ -11,8 +11,7 @@ const Contador = ({ item }) => {
 
     const [stockDisponible, setStockDisponible] = useState(item.stock);
     const [contador, setContador] = useState(0);
-
-    var finalizarCompra = false
+    const [finalizarCompra, setFinalizarCompra] = useState(false);
 
     const incrementarCantidad = () => {
         if (contador < stockDisponible)
@@ -30,22 +29,18 @@ const Contador = ({ item }) => {
         //actualizo mi carrito
         addItem(item, quantity)
         //seteo mi flag para indicar que confirmé una compra
-        finalizarCompra = true
-        setContador(0 )
+        setFinalizarCompra(true)
     }
 
-    function actualizarStock(itemId) {
-        const item = getItem(itemId)
+    function actualizarStock(itemSlug) {
+        const item = getItem(itemSlug)
         if (item)
             setStockDisponible(stockDisponible - item.quantity)
     }
 
     useEffect(() => {
-        actualizarStock(item.id)
+        actualizarStock(item.slug)
     }, [])
-
-    if (stockDisponible == 0)
-        return <p className="item-detail-stock">No hay stock del artículo.</p>
 
     return (
         <div className={styles.container}>
@@ -53,13 +48,13 @@ const Contador = ({ item }) => {
 
             {finalizarCompra
                 ? <div>
-                    <p className="pb-1 text-2xl font-bold">Ud. ha comprado {contador} artículo/s.</p>
-                    <div id="flex flex-col justify-center items-center gap-20">
-                        <Link href="/" className="inline-block align-middle text-center border font-normal whitespace-no-wrap rounded py-1 px-3 bg-gray-600 text-white hover:bg-gray-700 text-decoration hover: bg-[rgb(53, 53, 218)]">Elegir más productos</Link>
-                        <Link href="/cart" className="btn btn-secondary text-decoration text-center btn-ver-detalle">Finalizar Compra</Link>
+                    <p className="my-6 text-2xl font-bold text-center">Ud. ha comprado {contador} artículo/s.</p>
+                    <div className="flex flex-col justify-center items-center my-6">
+                        <Link href="/tienda/todos" className="text-xl align-middle text-center border rounded-2xl my-3 py-1 px-6 bg-gray-600 text-white hover:bg-[#3535da]">Elegir más productos</Link>
+                        <Link href="/cart" className="text-xl align-middle text-center border rounded-2xl my-3 py-1 px-6 bg-gray-600 text-white hover:bg-[#3535da]">Finalizar Compra</Link>
                     </div>
                 </div>
-                : <div>
+                : <div className="flex flex-col justify-center items-center">
                     <div className={styles.counter}>
                         <Boton className={styles.btnDecrementar} onClick={decrementarCantidad}>
                             -
@@ -69,7 +64,7 @@ const Contador = ({ item }) => {
                             +
                         </Boton>
                     </div>
-                    <boton className={styles.agregarAlCarrito} onClick={() => onAdd(contador)}>
+                    <boton className="text-xl mt-5 align-middle text-center border rounded-2xl py-2 px-6 bg-gray-600 text-white hover:bg-[#3535da]" onClick={() => onAdd(contador)}>                    
                         Agregar al carrito
                     </boton>
                 </div> 

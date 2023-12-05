@@ -6,7 +6,17 @@ import Link from "next/link";
 const CartWidget = () => {
 
     const { totalItems } = useCartContext()
+    
+    const cantidadArticulosComprados = totalItems()
 
+    //cuando el CART está vacío
+    if (cantidadArticulosComprados === 0)
+        return (
+            <>
+            </>
+        )
+
+    //cuando el CART contiene productos
     return (
         <div>
             <Link className="flex flex-row" href={"/cart"}>
@@ -16,7 +26,7 @@ const CartWidget = () => {
                         width={100}
                         height={70}
                     />
-                    <span id="cantidadProductos" className="absolute p-1 text-center font-semibold text-sm rounded-full py-2 px-4 bg-blue-600">{totalItems()}</span>
+                    <span id="cantidadProductos" className="absolute p-1 text-center font-semibold text-sm rounded-full py-2 px-4 bg-blue-600">{cantidadArticulosComprados}</span>
                 </Link>
         </div>
     )

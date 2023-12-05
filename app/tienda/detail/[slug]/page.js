@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import Loading from "./loading"
 
 const DetailPage = ({ params }) => {
-
+    
     const { slug } = params
 
     return (

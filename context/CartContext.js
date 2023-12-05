@@ -12,9 +12,9 @@ export function CartProvider({ children }) {
 
     //defino la funcion agregar una cierta "cantidad" de un producto al carrito
     const addItem = (item, quantity) => {
-        if (isInCart(item.id)) {
+        if (isInCart(item.slug)) {
             //debo encontrar la entrada en el carrito y actualizar la cantidad
-            const posItemExistente = cart.findIndex((elemento) => elemento.id === item.id)
+            const posItemExistente = cart.findIndex((elemento) => elemento.slug === item.slug)
             cart[posItemExistente].quantity += quantity
             setCart([...cart])
         }
@@ -25,8 +25,8 @@ export function CartProvider({ children }) {
     }
 
     //defino la funcion borrar producto del carrito
-    const removeItem = (itemId) => {
-        const cartActualizado = cart.filter(elemento => elemento.id !== itemId)
+    const removeItem = (itemSlug) => {
+        const cartActualizado = cart.filter(elemento => elemento.slug !== itemSlug)
         setCart(cartActualizado) 
     }
 
@@ -36,15 +36,15 @@ export function CartProvider({ children }) {
     }
 
     //defino la funcion para saber si un producto dado está incluído en el carrito
-    const isInCart = (itemId) => {
-        const itemExistente = cart.some((elemento) => elemento.id === itemId)
+    const isInCart = (itemSlug) => {
+        const itemExistente = cart.some((elemento) => elemento.slug === itemSlug)
         return itemExistente
     }
 
     //defino la funcion para saber si un producto dado está incluído en el carrito, en caso afirmativo retorno el producto
-    const getItem = (itemId) => {
-        if (isInCart(itemId)) {
-            const posItemExistente = cart.findIndex((elemento) => elemento.id === itemId)
+    const getItem = (itemSlug) => {
+        if (isInCart(itemSlug)) {
+            const posItemExistente = cart.findIndex((elemento) => elemento.slug === itemSlug)
             return cart[posItemExistente]
         }
         else

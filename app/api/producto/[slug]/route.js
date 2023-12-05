@@ -3,7 +3,6 @@ import { db } from '@/app/firebase/config'
 import { doc, getDoc } from "firebase/firestore"
 
 export async function GET(_, {params}) {
-
     const {slug} = params
 
     const docRef = doc(db, "productos", slug)

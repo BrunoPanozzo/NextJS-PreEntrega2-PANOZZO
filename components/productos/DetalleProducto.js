@@ -4,6 +4,7 @@ import Contador from "../ui/Contador"
 import NotFound from "@/app/not-found"
 
 const getProducto = async (slug) => {
+
     const response = await fetch(`http://localhost:3000/api/producto/${slug}`,{ cache: "no-store" })
 
     if (!response.ok)
@@ -12,11 +13,7 @@ const getProducto = async (slug) => {
     return response.json()
 }
 
-const DetalleProducto = async ({ slug }) => {
-
-    // const producto = await fetch(`http://localhost:3000/api/producto/${slug}`,
-    //                              { cache: 'no-store' }
-    // ).then(response => response.json())
+const DetalleProducto = async ({ slug }) => {    
 
     const producto = await getProducto(slug);
 
@@ -31,25 +28,24 @@ const DetalleProducto = async ({ slug }) => {
                 Volver
             </Retornar>
             <h1 className="font-bold text-4xl text-center mb-10">Producto Seleccionado</h1>
+            <h2 className="text-5xl border-b border-gray-200 pb-4 mb-4 pt-12 font-bold text-center">{producto.nombre}</h2>
             <article className="bg-gray-200 flex flex-col justify-center items-center p-12">
-                <section className="flex gap-6 flex-row justify-center items-center">
+                <section className="flex flex-row justify-center items-center">                
                     <div className="relative basis-1/2 pt-20 text-2xl content-start">
                         <Image
                             src={`/imgs/productos/${producto.imagen}`}
                             alt={producto.nombre}
                             width={860}
                             height={860}
+                            className="h-auto w-11/12"
                         />
                     </div>
-                    <div className="basis-1/2 ml-3">
-                        <h2 className="text-5xl border-b border-gray-200 pb-4 mb-4 pt-12 font-bold">{producto.nombre}</h2>
-                        <p className="pb-1 text-5xl font-bold">$ {producto.precio.toLocaleString()}</p>
-
+                    <div>                        
+                        <p className="text-center pb-10 text-5xl font-bold">$ {producto.precio.toLocaleString()}</p>
                         <Contador item={producto} />
                     </div>
                 </section>
                 <section className="mt-12 pt-20 text-2xl content-start">
-                    <h3 className="text-xl font-semibold border-b border-gray-200 pb-4 my-4">Descripción</h3>
                     <p className="text-gray-600">{producto.description}</p>
                 </section>
             </article>

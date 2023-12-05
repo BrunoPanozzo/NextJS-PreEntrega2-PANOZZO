@@ -3,6 +3,7 @@ import Producto from './Producto'
 import Boton from '../ui/Boton'
 
 const getProductos = async (categoria) => {
+    
     const response = await await fetch(`http://localhost:3000/api/productos/${categoria}`,{cache: 'no-cache'})
 
     if (!response.ok)
@@ -11,11 +12,7 @@ const getProductos = async (categoria) => {
     return response.json()
 }
 
-const ListaProductos = async ({ categoria, mostrarBotones }) => {
-
-    // const items =  await fetch(`http://localhost:3000/api/productos/${categoria}`,
-    //                            {cache: 'no-store'}
-    // ).then(response =>response.json())
+const ListaProductos = async ({ categoria, mostrarBotones }) => {   
 
     const items = await getProductos(categoria);
     

@@ -3,7 +3,6 @@ import { db } from '@/app/firebase/config'
 import { collection, getDocs, query, where } from "firebase/firestore"
 
 export async function GET(request, {params}) {
-
     const {categoria} = params
 
     const coleccionProductos = collection(db, "productos")
