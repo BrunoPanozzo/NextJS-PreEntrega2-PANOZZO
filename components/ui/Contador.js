@@ -54,21 +54,28 @@ const Contador = ({ item }) => {
                         <Link href="/cart" className="text-xl align-middle text-center border rounded-2xl my-3 py-1 px-6 bg-gray-600 text-white hover:bg-[#3535da]">Finalizar Compra</Link>
                     </div>
                 </div>
-                : <div className="flex flex-col justify-center items-center">
-                    <div className={styles.counter}>
-                        <Boton className={styles.btnDecrementar} onClick={decrementarCantidad}>
-                            -
-                        </Boton>
-                        <label className={styles.counterValue}>{contador}</label>
-                        <Boton className={styles.btnIncrementar} onClick={incrementarCantidad}>
-                            +
-                        </Boton>
+                : (stockDisponible != 0)
+                    ?
+                    <div className="flex flex-col justify-center items-center">
+                        <div className={styles.counter}>
+                            <Boton className={styles.btnDecrementar} onClick={decrementarCantidad}>
+                                -
+                            </Boton>
+                            <label className={styles.counterValue}>{contador}</label>
+                            <Boton className={styles.btnIncrementar} onClick={incrementarCantidad}>
+                                +
+                            </Boton>
+                        </div>
+                        <boton className="text-xl mt-5 align-middle text-center border rounded-2xl py-2 px-6 bg-gray-600 text-white hover:bg-[#3535da]" onClick={() => onAdd(contador)}>
+                            Agregar al carrito
+                        </boton>
                     </div>
-                    <boton className="text-xl mt-5 align-middle text-center border rounded-2xl py-2 px-6 bg-gray-600 text-white hover:bg-[#3535da]" onClick={() => onAdd(contador)}>                    
-                        Agregar al carrito
-                    </boton>
-                </div> 
-            }
+                    :
+                    <div className="flex flex-col justify-center items-center my-6">
+                        <Link href="/tienda/todos" className="text-xl align-middle text-center border rounded-2xl my-3 py-1 px-6 bg-gray-600 text-white hover:bg-[#3535da]">Elegir más productos</Link>
+                        <Link href="/cart" className="text-xl align-middle text-center border rounded-2xl my-3 py-1 px-6 bg-gray-600 text-white hover:bg-[#3535da]">Finalizar Compra</Link>
+                    </div>
+            }            
         </div>
     )
 }

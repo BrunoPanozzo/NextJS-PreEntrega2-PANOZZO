@@ -24,7 +24,7 @@ const DetalleProducto = async ({ slug }) => {
 
     return (
         <div className="max-w-6xl m-auto mb-6">
-            <Retornar className="text-sm text-blue-500 mb-6">
+            <Retornar className="text-xl mt-5 align-middle text-center border rounded-2xl py-2 px-6 bg-gray-600 text-white hover:bg-[#3535da]">
                 Volver
             </Retornar>
             <h1 className="font-bold text-4xl text-center mb-10">Producto Seleccionado</h1>
