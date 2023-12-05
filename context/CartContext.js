@@ -59,7 +59,7 @@ export function CartProvider({ children }) {
     //defino el monto total del carrito
     const totalMonto = () => {
         const monto = cart.reduce((acum, prod) => acum += prod.quantity * prod.precio, 0)
-        return monto.toLocaleString()
+        return monto
     }
 
     return (
